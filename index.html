@@ -1,7 +1,94 @@
 <!DOCTYPE html>
-<html>
-<body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+
+<!-- Referenced as an example from by rabidGadfly.com -->
+<!-- http://rabidgadfly.com/2013/02/angular-and-xml-no-problem/ -->
+
+<!-- Define this as an AngularJS app that uses the module named myApp -->
+<html ng-app="myApp">
+
+<head>
+    <!-- Don't forget to load angularjs -->
+ 
+    <!-- Load the converted script -->
+    
+    <!-- Our modules and controller -->
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+    <link href='https://fonts.googleapis.com/css?family=MedievalSharp:400,500,700,400italic' rel='stylesheet' type='text/css'>
+        <script src="/bower_components/angular/angular.js"></script>
+
+    <script src="/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-material/angular-material.js"></script>
+        <script src="app.js"></script>
+    <script src="xml2json.js"></script>
+    <!-- Give it some style -->
+    <link rel="stylesheet" href="app.css">
+   <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
+
+</head>
+
+<body  layout="column"  ng-controller="AppController" >
+      
+  
+<md-toolbar layout="row">
+      <md-button class="menu" hide-gt-sm ng-click="toggleList()" aria-label="Show User List">
+        <md-icon md-svg-icon="menu" ></md-icon>
+      </md-button>
+      <h1>Versos benditos</h1>
+    </md-toolbar>
+  <div>
+ <div flex layout="row">
+
+        <md-sidenav  ng-click="toggleList()" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"  class="md-sidenav-left" >
+            <md-content>
+          <md-list>
+            <md-list-item ng-repeat="b in dataSet">
+                <md-button ng-click="selectBook(b)" ng-class="{'selected' : b === ul.selected }">
+                  <!--<md-icon md-svg-icon="{{it.avatar}}" class="avatar"></md-icon>-->
+                  {{b._n}}
+                </md-button>
+            </md-list-item>
+          </md-list>
+                </md-content>
+        </md-sidenav>
+
+        <md-content flex id="content">
+<!--          <md-icon md-svg-icon="{{ul.selected.avatar}}" class="avatar"></md-icon>-->
+          <h2>{{currentBook._n}}</h2>
+<!--           <p>{{currentBook | json}}</p>-->
+          <md-card ng-repeat="c in currentBook.c">
+              
+               <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline"> {{c._n}}</span>
+          </md-card-title-text>
+<!--          <md-card-title-media>
+            <div class="md-media-lg card-media"></div>
+          </md-card-title-media>-->
+        </md-card-title>
+              
+             
+            
+            <p ng-repeat="v in c.v">{{v._n}} {{v.__text}}</p>
+            </md-card>
+            
+<!--
+          <md-button class="share" md-no-ink ng-click="ul.makeContact(ul.selected)" aria-label="Share with {{ ul.selected.name }}">
+            <md-icon md-svg-icon="share"></md-icon>
+          </md-button>
+-->
+        </md-content>
+
+    </div>
+      
+
+  </div>
+
 </body>
+
 </html>
